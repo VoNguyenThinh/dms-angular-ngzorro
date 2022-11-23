@@ -1,0 +1,34 @@
+<div class="auth">
+  <div nz-row nzJustify="center" nzAlign="middle" class="auth__row">
+    <div nz-col nzXs="24" nzMd="12" nzLg="6" nzXl="6">
+      <div class="auth__form">
+        <div class="auth__logo">
+          <img src="/assets/images/logo.png" alt="" />
+        </div>
+        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()"  nzLayout="vertical">
+          <nz-form-item  >
+            <nz-form-label nzRequired="true"  nzFor="userName" class="fw-bold">Email</nz-form-label>
+            <nz-form-control [nzErrorTip]="emailErrorTpl">
+              <nz-input-group nzPrefixIcon="mail" nzSize="large">
+                <input type="text" nz-input formControlName="userName" placeholder="Email" size="large" />
+                <ng-template #emailErrorTpl let-control>
+                  <ng-container *ngIf="control.hasError('email')">The input is not valid Email!</ng-container>
+                  <ng-container *ngIf="control.hasError('required')">Please input your Email!</ng-container>
+                </ng-template>
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <nz-form-item>
+            <nz-form-label nzRequired="true"  nzFor="password" class="fw-bold">Password</nz-form-label>
+            <nz-form-control nzErrorTip="Please input your password!">
+              <nz-input-group nzPrefixIcon="lock" nzSize="large">
+                <input type="password" nz-input formControlName="password" placeholder="Password" size="large" />
+              </nz-input-group>
+            </nz-form-control>
+          </nz-form-item>
+          <button nz-button class="fw-bold mt-2" nzType="primary" nzBlock="" nzSize="large">Log in</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
