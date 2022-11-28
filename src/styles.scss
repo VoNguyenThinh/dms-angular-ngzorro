@@ -2,6 +2,8 @@
 
 body {
   font-family: 'KoHo', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
 
   // Custom Button
   .ant-btn {
@@ -21,7 +23,7 @@ body {
   }
 
   // Custom Input
-  .ant-input-affix-wrapper{
+  .ant-input-affix-wrapper {
     border-radius: 10px;
   }
 }

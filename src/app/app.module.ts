@@ -8,20 +8,21 @@ import { en_US } from 'ng-zorro-antd/i18n';
 import { registerLocaleData } from '@angular/common';
 import en from '@angular/common/locales/en';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ngxLoadingAnimationTypes, NgxLoadingModule } from 'ngx-loading';
+
 // --------------Import module ng-Zorro----------------------------------//
-import { NGZorroModule } from './ng-zorro.module';
-import { LoginComponent } from './components/auth/login/login.component';
+import { NGZorroModule } from './modules/ng-zorro.module';
 import { CookieService } from 'ngx-cookie-service';
+import { Interceptor } from './api/interceptor';
+import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
+import { IconsProviderModule } from './modules/icons-provider.module';
 
 registerLocaleData(en);
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-  ],
+  declarations: [AppComponent, NotFoundPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -29,12 +30,13 @@ registerLocaleData(en);
     HttpClientModule,
     BrowserAnimationsModule,
     NGZorroModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    IconsProviderModule,
+    NgxLoadingModule.forRoot({
+      animationType: ngxLoadingAnimationTypes.circleSwish
+    })
   ],
-  providers: [
-    { provide: NZ_I18N, useValue: en_US, },
-    CookieService
-  ],
+  providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }, CookieService],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {}

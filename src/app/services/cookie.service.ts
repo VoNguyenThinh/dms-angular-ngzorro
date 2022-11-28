@@ -3,27 +3,27 @@ import { CookieService } from 'ngx-cookie-service';
 // import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
-   providedIn: 'root'
+  providedIn: 'root'
 })
-export class Cookie {
-   constructor(private cookieService: CookieService) {}
+export class CookieServices {
+  constructor(private cookieService: CookieService) {}
 
-   getItem(key: string) {
-      const result = this.cookieService.get(key || '');
-      JSON.parse(result)
-      return result
-   }
+  getItem(key: string) {
+    const result = this.cookieService.get(key || '');
+    JSON.parse(result);
+    return result;
+  }
 
-   setItem(key: string, value: any) {
-      this.cookieService.set(key, JSON.stringify(value));
-   }
+  setItem(key: string, value: any) {
+    this.cookieService.set(key, JSON.stringify(value), { expires: 60, path: '/' });
+  }
 
-   removeItem(key: string) {
-     this.cookieService.delete(key)
-   }
+  removeItem(key: string) {
+    this.cookieService.delete(key);
+  }
 
-   clearCookie(){
-    this.cookieService.deleteAll()
-   }
+  clearCookie() {
+    this.cookieService.deleteAll();
+  }
 }
 

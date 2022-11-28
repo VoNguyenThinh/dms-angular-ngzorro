@@ -1,33 +1,25 @@
-import { Component } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { STRINGS } from './constants';
+import { AuthService } from './services/auth.service';
+import { CookieServices } from './services/cookie.service';
+import { GlobalService } from './services/global.service';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent {
-  // validateForm!: UntypedFormGroup;
+export class AppComponent implements OnInit {
+  appLoading!: boolean;
 
-  // submitForm(): void {
-  //   if(this.validateForm.invalid){
-  //     Object.values(this.validateForm.controls).forEach(formItem=>{
-  //       formItem.markAsDirty();
-  //       formItem.updateValueAndValidity({ onlySelf: true });
-  //     })
-  //   }else{
-  //     console.log(this.validateForm.value);
-  //   }
-  // }
+  constructor(private globalService: GlobalService, private cookieService: CookieServices, private auth: AuthService) {
+    this.globalService.appLoading.subscribe(value => {
+      this.appLoading = value;
+    });
+  }
 
-  // constructor(private formBuilder: UntypedFormBuilder){
+  ngOnInit(): void {
 
-  // }
-
-  // ngOnInit(): void {
-  //   this.validateForm = this.formBuilder.group({
-  //     userName: [null, [Validators.required]],
-  //     password: [null, [Validators.required]],
-  //   });
-  // }
+  }
 }
+

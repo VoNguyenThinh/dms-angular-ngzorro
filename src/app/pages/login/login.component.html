@@ -5,12 +5,13 @@
         <div class="auth__logo">
           <img src="/assets/images/logo.png" alt="" />
         </div>
-        <form nz-form [formGroup]="validateForm" class="login-form" (ngSubmit)="submitForm()"  nzLayout="vertical">
+        <form nz-form [formGroup]="formData" class="login-form" (ngSubmit)="handleLogin()"  nzLayout="vertical">
+          <nz-alert *ngIf="isError" nzType="error" nzMessage="Invalid username or password!" nzShowIcon class="mb-3"></nz-alert>
           <nz-form-item  >
-            <nz-form-label nzRequired="true"  nzFor="userName" class="fw-bold">Email</nz-form-label>
+            <nz-form-label nzRequired="true"  nzFor="username" class="fw-bold">Email</nz-form-label>
             <nz-form-control [nzErrorTip]="emailErrorTpl">
               <nz-input-group nzPrefixIcon="mail" nzSize="large">
-                <input type="text" nz-input formControlName="userName" placeholder="Email" size="large" />
+                <input type="text" nz-input formControlName="username" placeholder="Email" size="large" />
                 <ng-template #emailErrorTpl let-control>
                   <ng-container *ngIf="control.hasError('email')">The input is not valid Email!</ng-container>
                   <ng-container *ngIf="control.hasError('required')">Please input your Email!</ng-container>
