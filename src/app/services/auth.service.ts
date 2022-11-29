@@ -18,7 +18,7 @@ export class AuthService {
 
   checkToken() {
     let isAuthenticated: boolean = false;
-    const token = this.cookieService.getItem(STRINGS.STORAGE_KEY.TOKEN);
+    const token = this.cookieService.getItem(STRINGS.STORAGE_KEY.TOKEN) || null;
     if (!isEmpty(token)) {
       isAuthenticated = true;
     }

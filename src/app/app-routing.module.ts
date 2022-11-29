@@ -2,12 +2,17 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
 import { AuthGuard } from './guard/authen.guard';
+import { LoginAuthGuard } from './guard/login.auth.guard';
 
 const routes: Routes = [
-  { path: 'auth', children: [{ path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) }] },
-  { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
+  { path: '', loadChildren: () => import('./pages/main.layout/main.layout.module').then(m => m.MainLayoutModule) },
+  {
+    path: 'auth',
+    children: [{ path: 'login', loadChildren: () => import('./pages/login/login.module').then(m => m.LoginModule) }],
+    canActivate: [LoginAuthGuard]
+  },
+  // { path: 'home', loadChildren: () => import('./pages/home/home.module').then(m => m.HomeModule), canActivate: [AuthGuard] },
 
-  { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: '**', component: NotFoundPageComponent }
 ];
 

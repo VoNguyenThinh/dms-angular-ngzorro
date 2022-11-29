@@ -17,7 +17,6 @@ import { NGZorroModule } from './modules/ng-zorro.module';
 import { CookieService } from 'ngx-cookie-service';
 import { Interceptor } from './api/interceptor';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
-import { IconsProviderModule } from './modules/icons-provider.module';
 
 registerLocaleData(en);
 
@@ -31,7 +30,6 @@ registerLocaleData(en);
     BrowserAnimationsModule,
     NGZorroModule,
     ReactiveFormsModule,
-    IconsProviderModule,
     NgxLoadingModule.forRoot({
       animationType: ngxLoadingAnimationTypes.circleSwish
     })
@@ -40,3 +38,4 @@ registerLocaleData(en);
   bootstrap: [AppComponent]
 })
 export class AppModule {}
+
