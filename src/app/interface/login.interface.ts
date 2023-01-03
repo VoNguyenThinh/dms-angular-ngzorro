@@ -1,4 +1,9 @@
 export interface LoginPayload {
-  username: string;
+  email: string;
   password: string;
+}
+
+export interface ResponseMethod {
+  onSuccess?: (result: any) => void;
+  onError?: (error: any) => void;
 }

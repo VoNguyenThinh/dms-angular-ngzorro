@@ -18,7 +18,7 @@ export class CookieServices {
 
   setItem(key: string, value: any) {
     const date = new Date();
-    date.setTime(date.getTime() + (30 * 60 * 1000)); // 30 minutes
+    date.setTime(date.getTime() + 60 * 60 * 1000); // 30 minutes
     this.cookieService.set(key, JSON.stringify(value), { expires: date, path: '/' });
   }
 

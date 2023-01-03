@@ -1,1 +1,25 @@
-<h1>home</h1>
+<div nz-row [nzGutter]="{ xs: 8, sm: 16, md: 24, lg: 32 }">
+  <div nz-col class="gutter-row" [nzSpan]="6">
+    <div class="inner-box">
+      <nz-card style="width: 100%; cursor: pointer" [nzCover]="coverTemplate" [nzActions]="[actionSetting, actionEdit, actionEllipsis]">
+        <nz-card-meta nzTitle="Ipad air 2022" nzDescription="{{ text | longString }}"></nz-card-meta>
+      </nz-card>
+
+      <ng-template #avatarTemplate>
+        <nz-avatar nzSrc="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"></nz-avatar>
+      </ng-template>
+      <ng-template #coverTemplate>
+        <img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />
+      </ng-template>
+      <ng-template #actionSetting>
+        <nz-badge nzColor="#87d068" nzText="Available"></nz-badge>
+      </ng-template>
+      <ng-template #actionEdit>
+        <span nz-icon nzType="edit"></span>
+      </ng-template>
+      <ng-template #actionEllipsis>
+        <span nz-icon nzType="ellipsis"></span>
+      </ng-template>
+    </div>
+  </div>
+</div>

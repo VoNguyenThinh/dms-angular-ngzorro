@@ -8,8 +8,14 @@ import { NzAlertModule } from 'ng-zorro-antd/alert';
 import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzBreadCrumbModule } from 'ng-zorro-antd/breadcrumb';
 import { NzMenuModule } from 'ng-zorro-antd/menu';
+import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
+import { NzCardModule } from 'ng-zorro-antd/card';
+import { NzAvatarModule } from 'ng-zorro-antd/avatar';
+import { NzBadgeModule } from 'ng-zorro-antd/badge';
+import { NzTagModule } from 'ng-zorro-antd/tag';
+import { NzTableModule } from 'ng-zorro-antd/table';
 @NgModule({
-  exports:[
+  exports: [
     NzButtonModule,
     NzFormModule,
     NzInputModule,
@@ -18,8 +24,13 @@ import { NzMenuModule } from 'ng-zorro-antd/menu';
     NzLayoutModule,
     NzBreadCrumbModule,
     NzLayoutModule,
-    NzMenuModule
+    NzMenuModule,
+    NzDropDownModule,
+    NzAvatarModule,
+    NzCardModule,
+    NzBadgeModule,
+    NzTagModule,
+    NzTableModule
   ]
 })
-
-export class NGZorroModule{}
+export class NGZorroModule {}

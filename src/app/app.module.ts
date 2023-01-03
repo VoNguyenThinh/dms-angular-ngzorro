@@ -17,7 +17,6 @@ import { NGZorroModule } from './modules/ng-zorro.module';
 import { CookieService } from 'ngx-cookie-service';
 import { Interceptor } from './api/interceptor';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
-
 registerLocaleData(en);
 
 @NgModule({

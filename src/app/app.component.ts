@@ -19,6 +19,12 @@ export class AppComponent implements OnInit {
 
   ngOnInit(): void {
     const token = this.authService.checkToken();
+    const email = this.globalService.checkUserInfo();
+
+    if (email) {
+      this.globalService.setUserInfo({ email });
+    }
+
     if (token) {
       this.globalService.setIsAuthenticated(true);
       this.isAuthenticated = true;
