@@ -1,16 +1,11 @@
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { HomeRoutingModule } from './home-routing.module';
-import { HomePageComponent } from './home-page.component';
-
+import { NGZorroModule } from 'src/app/modules/ng-zorro.module';
 
 @NgModule({
-  declarations: [HomePageComponent],
-  imports: [
-    CommonModule,
-    HomeRoutingModule,
-  ],
-  exports:[HomePageComponent]
+  imports: [CommonModule, HomeRoutingModule, NGZorroModule]
 })
-export class HomeModule { }
+export class HomeModule {}
+

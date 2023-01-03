@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { STRINGS } from './constants';
 import { AuthService } from './services/auth.service';
-import { CookieServices } from './services/cookie.service';
 import { GlobalService } from './services/global.service';
 
 @Component({
@@ -10,16 +8,27 @@ import { GlobalService } from './services/global.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  appLoading!: boolean;
+  appLoading: boolean;
+  isAuthenticated: boolean;
 
-  constructor(private globalService: GlobalService, private cookieService: CookieServices, private auth: AuthService) {
+  constructor(private globalService: GlobalService, private authService: AuthService) {
     this.globalService.appLoading.subscribe(value => {
       this.appLoading = value;
     });
   }
 
   ngOnInit(): void {
+    const token = this.authService.checkToken();
+    const email = this.globalService.checkUserInfo();
 
+    if (email) {
+      this.globalService.setUserInfo({ email });
+    }
+
+    if (token) {
+      this.globalService.setIsAuthenticated(true);
+      this.isAuthenticated = true;
+    }
   }
 }
 

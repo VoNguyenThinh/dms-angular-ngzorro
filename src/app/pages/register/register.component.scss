@@ -1,0 +1,38 @@
+.auth {
+  height: 100vh;
+  background: url('/assets/images/bg-login.jpg');
+  background-position: center;
+  background-size: cover;
+  padding: 0 16px;
+
+  &__row {
+    height: 100%;
+  }
+
+  &__logo {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+
+    img {
+      width: 70%;
+    }
+  }
+
+  &__form {
+    background: #fff;
+    border-radius: 8px;
+    padding: 16px 24px 24px 24px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  }
+}
+
+// For Tablet & PC
+@media only screen and (min-width: 576px) {
+  .auth__form {
+    padding: 32px;
+  }
+  .auth__logo {
+    margin-bottom: 24px;
+  }
+}

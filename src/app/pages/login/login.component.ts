@@ -2,7 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { API_PATH, STRINGS } from 'src/app/constants';
+import { get } from 'lodash';
+import { API_PATH, ERROR_CODE, STRINGS } from 'src/app/constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieServices } from 'src/app/services/cookie.service';
 import { GlobalService } from 'src/app/services/global.service';
@@ -12,55 +13,63 @@ import { GlobalService } from 'src/app/services/global.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-
 export class LoginComponent implements OnInit {
   formData!: UntypedFormGroup;
   appLoading!: boolean;
   appData!: any;
   isError!: boolean;
+  errorMessage: string = '';
+  passwordVisible = false;
+  password?: string;
 
   constructor(
     private formBuilder: UntypedFormBuilder,
     private authService: AuthService,
     private globalService: GlobalService,
     private cookieService: CookieServices,
-    private router: Router
+    public router: Router
   ) {
     this.globalService.appLoading.subscribe(value => {
       this.appLoading = value;
     });
+
+    this.formData = this.formBuilder.group({
+      email: ['admin01@gmail.com', [Validators.required, Validators.email]],
+      password: [null, [Validators.required]]
+    });
   }
 
-  async handleLogin(): Promise<void> {
+  handleLogin() {
     if (this.formData.invalid) {
       Object.values(this.formData.controls).forEach(formItem => {
         formItem.markAsDirty();
         formItem.updateValueAndValidity({ onlySelf: true });
       });
     } else {
-      const payload = this.formData.value;
       this.globalService.setAppLoading(true);
-
-      await this.authService.login(payload).subscribe(
-        (data: any) => {
+      const payload = this.formData.value;
+      this.authService.login(payload, {
+        onSuccess: result => {
+          console.log(result);
           this.globalService.setAppLoading(false);
-          this.cookieService.setItem(STRINGS.STORAGE_KEY.TOKEN, data.jwt);
+          this.globalService.setUserInfo({ email: result.user.email });
+          this.globalService.setIsAuthenticated(true);
+          this.cookieService.setItem(STRINGS.STORAGE_KEY.TOKEN, result.user.accessToken);
+          this.cookieService.setItem(STRINGS.USER.EMAIL, result.user.email);
           this.router.navigate(['home']);
         },
-        (error: any) => {
+        onError: error => {
+          console.log(error.code);
           this.globalService.setAppLoading(false);
           this.isError = true;
-          console.log(error);
+          this.errorMessage = get(ERROR_CODE, error.code);
         }
-      );
+      });
     }
   }
 
   ngOnInit(): void {
-    this.formData = this.formBuilder.group({
-      username: ['admin2@gmail.com', [Validators.required, Validators.email]],
-      password: [null, [Validators.required]]
-    });
+    // this.globalService.setAppLoading(true);
   }
 
   ngAfterViewInit() {}

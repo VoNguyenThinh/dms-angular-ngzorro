@@ -1,26 +1,38 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { isEmpty } from 'lodash';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { STRINGS } from '../constants';
+import { CookieServices } from './cookie.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class GlobalService {
-  private appLoading$ =  new BehaviorSubject<boolean>(false)
-  public appLoading = this.appLoading$.asObservable()
+  constructor( private cookieService: CookieServices) {}
 
-  private isAuthenticated$ =  new BehaviorSubject<boolean>(false)
-  public isAuthenticated = this.isAuthenticated$.asObservable()
+  private appLoading$ = new BehaviorSubject<boolean>(false);
+  public appLoading = this.appLoading$.asObservable();
 
+  private isAuthenticated$ = new BehaviorSubject<boolean>(false);
+  public isAuthenticated = this.isAuthenticated$.asObservable();
 
+  private userInfo$ = new BehaviorSubject<any>(null);
+  public userInfo = this.userInfo$.asObservable();
 
-  setAppLoading(value:boolean){
-    this.appLoading$.next(value)
+  setAppLoading(value: boolean) {
+    this.appLoading$.next(value);
   }
 
-  setIsAuthenticated(value:boolean){
-    this.isAuthenticated$.next(value)
+  setIsAuthenticated(value: boolean) {
+    this.isAuthenticated$.next(value);
   }
 
-  constructor() {}
+  setUserInfo(value: any) {
+    this.userInfo$.next(value);
+  }
+  checkUserInfo(){
+    const email = this.cookieService.getItem(STRINGS.USER.EMAIL) || null;
+    return email
+  }
 }
 
