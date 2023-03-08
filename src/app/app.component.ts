@@ -1,34 +1,35 @@
 import { Component, OnInit } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
 import { AuthService } from './services/auth.service';
 import { GlobalService } from './services/global.service';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+   selector: 'app-root',
+   templateUrl: './app.component.html',
+   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  appLoading: boolean;
-  isAuthenticated: boolean;
+   appLoading: boolean;
+   isAuthenticated: boolean;
+   constructor(private globalService: GlobalService, private authService: AuthService, translate: TranslateService) {
+      translate.use('en');
 
-  constructor(private globalService: GlobalService, private authService: AuthService) {
-    this.globalService.appLoading.subscribe(value => {
-      this.appLoading = value;
-    });
-  }
+      this.globalService.appLoading.subscribe(value => {
+         this.appLoading = value;
+      });
+   }
 
-  ngOnInit(): void {
-    const token = this.authService.checkToken();
-    const email = this.globalService.checkUserInfo();
+   ngOnInit(): void {
+      const token = this.authService.checkToken();
+      const email = this.globalService.checkUserInfo();
 
-    if (email) {
-      this.globalService.setUserInfo({ email });
-    }
+      if (email) {
+         this.globalService.setUserInfo({ email });
+      }
 
-    if (token) {
-      this.globalService.setIsAuthenticated(true);
-      this.isAuthenticated = true;
-    }
-  }
+      if (token) {
+         this.globalService.setIsAuthenticated(true);
+         this.isAuthenticated = true;
+      }
+   }
 }
-

@@ -14,6 +14,7 @@ import { NzAvatarModule } from 'ng-zorro-antd/avatar';
 import { NzBadgeModule } from 'ng-zorro-antd/badge';
 import { NzTagModule } from 'ng-zorro-antd/tag';
 import { NzTableModule } from 'ng-zorro-antd/table';
+import { NzSelectModule } from 'ng-zorro-antd/select';
 @NgModule({
   exports: [
     NzButtonModule,
@@ -30,7 +31,8 @@ import { NzTableModule } from 'ng-zorro-antd/table';
     NzCardModule,
     NzBadgeModule,
     NzTagModule,
-    NzTableModule
+    NzTableModule,
+    NzSelectModule
   ]
 })
 export class NGZorroModule {}

@@ -30,4 +30,3 @@ export class CookieServices {
     this.cookieService.deleteAll();
   }
 }
-

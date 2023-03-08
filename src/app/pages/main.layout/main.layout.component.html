@@ -1,58 +1,58 @@
 <nz-layout class="app-layout">
-  <nz-sider
-    class="menu-sidebar"
-    nzCollapsible
-    nzWidth="200px"
-    [nzCollapsed]="isCollapsed"
-    [nzCollapsedWidth]="0"
-    [nzTrigger]="null"
-  >
-    <div class="sidebar-logo">
-      <a href="https://ng.ant.design/" target="_blank">
-        <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-        <h1>Manage Engine &reg;</h1>
-      </a>
-    </div>
-    <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-      <li nz-menu-item nzMatchRouter routerLink="/home"><span nz-icon nzType="laptop"></span><span>Devices</span></li>
-      <li nz-menu-item nzMatchRouter routerLink="/members"><span nz-icon nzType="user"></span> <span>Manage members</span></li>
-      <li nz-menu-item nzMatchRouter routerLink="/devices"><span nz-icon nzType="control"></span> <span>Manage devices</span></li>
-      <li nz-menu-item nzMatchRouter><span nz-icon nzType="form"></span> <span>Manage request</span></li>
-      <li nz-menu-item nzMatchRouter><span nz-icon nzType="check-circle"></span> <span>Accepted devices</span></li>
-      <li nz-menu-item nzMatchRouter><span nz-icon nzType="bar-chart"></span> <span>Device tracking</span></li>
-    </ul>
-    <div [ngClass]="{ 'close-trigger': true, 'show-trigger': !isCollapsed, 'hide-trigger': isCollapsed }" (click)="isCollapsed = !isCollapsed">
-      <span nz-icon nzType="menu"></span>
-    </div>
-  </nz-sider>
-  <nz-layout>
-    <nz-header>
-      <div class="app-header d-flex justify-content-end container">
-        <div class="member__box d-flex">
-          <div class="member__box--name fw-bold">{{ userInfo?.email }}</div>
-          <div class="member__box--avatar icon-trigger" nz-dropdown [nzDropdownMenu]="menu"><span nz-icon nzType="user"></span></div>
-        </div>
+   <nz-sider class="menu-sidebar" nzCollapsible nzWidth="200px" [nzCollapsed]="isCollapsed" [nzCollapsedWidth]="0" [nzTrigger]="null">
+      <div class="sidebar-logo">
+         <a href="https://ng.ant.design/" target="_blank">
+            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
+            <h1>Manage Engine &reg;</h1>
+         </a>
       </div>
-    </nz-header>
+      <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
+         <li nz-menu-item nzMatchRouter routerLink="/home"><span nz-icon nzType="laptop"></span><span>Devices</span></li>
+         <li nz-menu-item nzMatchRouter routerLink="/members"><span nz-icon nzType="user"></span> <span>Manage members</span></li>
+         <li nz-menu-item nzMatchRouter routerLink="/devices"><span nz-icon nzType="control"></span> <span>Manage devices</span></li>
+         <li nz-menu-item nzMatchRouter><span nz-icon nzType="form"></span> <span>Manage request</span></li>
+         <li nz-menu-item nzMatchRouter><span nz-icon nzType="check-circle"></span> <span>Accepted devices</span></li>
+         <li nz-menu-item nzMatchRouter><span nz-icon nzType="bar-chart"></span> <span>Device tracking</span></li>
+      </ul>
+      <div [ngClass]="{ 'close-trigger': true, 'show-trigger': !isCollapsed, 'hide-trigger': isCollapsed }" (click)="isCollapsed = !isCollapsed">
+         <span nz-icon nzType="menu"></span>
+      </div>
+   </nz-sider>
+   <nz-layout>
+      <nz-header>
+         <div class="app-header d-flex justify-content-end container gap-2">
+            <div class="language_box">
+               <nz-select [(ngModel)]="selectedValue" class="w-100">
+                  <nz-option nzValue="vie" nzLabel="Vietnam"></nz-option>
+                  <nz-option nzValue="eng" nzLabel="English"></nz-option>
+                  <nz-option nzValue="tha" nzLabel="Thailand"></nz-option>
+                  <nz-option nzValue="ind" nzLabel="Indonesia"></nz-option>
+               </nz-select>
+            </div>
+            <div class="member__box d-flex">
+               <div class="member__box--name fw-bold">{{ userInfo?.email }}</div>
+               <div class="member__box--avatar icon-trigger" nz-dropdown [nzDropdownMenu]="menu"><span nz-icon nzType="user"></span></div>
+            </div>
+         </div>
+      </nz-header>
 
-    <nz-content>
-      <div class="inner-content container">
-        <router-outlet></router-outlet>
-      </div>
-    </nz-content>
-  </nz-layout>
+      <nz-content>
+         <div class="inner-content container">
+            <router-outlet></router-outlet>
+         </div>
+      </nz-content>
+   </nz-layout>
 </nz-layout>
 
 <nz-dropdown-menu #menu="nzDropdownMenu">
-  <ul nz-menu>
-    <li nz-menu-item class="d-flex justify-content-between gap-3">
-      <div>Profile</div>
-      <span nz-icon nzType="profile"></span>
-    </li>
-    <li nz-menu-item class="d-flex justify-content-between gap-3" (click)="onLogout()">
-      <div>Log out</div>
-      <span nz-icon nzType="logout"></span>
-    </li>
-  </ul>
+   <ul nz-menu>
+      <li nz-menu-item class="d-flex justify-content-between gap-3">
+         <div>Profile</div>
+         <span nz-icon nzType="profile"></span>
+      </li>
+      <li nz-menu-item class="d-flex justify-content-between gap-3" (click)="onLogout()">
+         <div>Log out</div>
+         <span nz-icon nzType="logout"></span>
+      </li>
+   </ul>
 </nz-dropdown-menu>
-
