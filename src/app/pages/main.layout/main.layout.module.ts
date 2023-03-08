@@ -9,11 +9,11 @@ import { HomePageComponent } from '../home/home-page.component';
 import { UserComponent } from '../user/user.component';
 import { LongStringPipe } from 'src/app/pipes/long-string.pipe';
 import { ManageDevicesComponent } from '../manage-devices/manage-devices.component';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
-  imports: [CommonModule, MainLayoutRoutingModule, NGZorroModule, IconsProviderModule],
-  declarations: [MainLayoutComponent, HomePageComponent, UserComponent,ManageDevicesComponent, LongStringPipe],
-  exports: [MainLayoutComponent]
+   imports: [CommonModule, MainLayoutRoutingModule, NGZorroModule, IconsProviderModule, FormsModule, ReactiveFormsModule],
+   declarations: [MainLayoutComponent, HomePageComponent, UserComponent, ManageDevicesComponent, LongStringPipe],
+   exports: [MainLayoutComponent]
 })
 export class MainLayoutModule {}
-

@@ -9,4 +9,3 @@ import { NGZorroModule } from 'src/app/modules/ng-zorro.module';
   imports: [CommonModule, ManageDevicesRoutingModule, NGZorroModule],
 })
 export class ManageDevicesModule {}
-
