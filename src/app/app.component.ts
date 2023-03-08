@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
+import { STRINGS } from './constants';
 import { AuthService } from './services/auth.service';
+import { CookieServices } from './services/cookie.service';
 import { GlobalService } from './services/global.service';
 
 @Component({
@@ -11,8 +13,10 @@ import { GlobalService } from './services/global.service';
 export class AppComponent implements OnInit {
    appLoading: boolean;
    isAuthenticated: boolean;
-   constructor(private globalService: GlobalService, private authService: AuthService, translate: TranslateService) {
-      translate.use('en');
+
+   constructor(private globalService: GlobalService, private authService: AuthService, private cookieService: CookieServices) {
+      const language = this.cookieService.getItem(STRINGS.STORAGE_KEY.LANGUAGE);
+      this.globalService.setLanguage(language ?? 'en');
 
       this.globalService.appLoading.subscribe(value => {
          this.appLoading = value;

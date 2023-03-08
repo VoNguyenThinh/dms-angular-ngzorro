@@ -1,18 +1,27 @@
 <nz-layout class="app-layout">
    <nz-sider class="menu-sidebar" nzCollapsible nzWidth="200px" [nzCollapsed]="isCollapsed" [nzCollapsedWidth]="0" [nzTrigger]="null">
       <div class="sidebar-logo">
-         <a href="https://ng.ant.design/" target="_blank">
-            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo" />
-            <h1>Manage Engine &reg;</h1>
-         </a>
+         <h1>Manage Engine &reg;</h1>
       </div>
       <ul nz-menu nzTheme="dark" nzMode="inline" [nzInlineCollapsed]="isCollapsed">
-         <li nz-menu-item nzMatchRouter routerLink="/home"><span nz-icon nzType="laptop"></span><span>Devices</span></li>
-         <li nz-menu-item nzMatchRouter routerLink="/members"><span nz-icon nzType="user"></span> <span>Manage members</span></li>
-         <li nz-menu-item nzMatchRouter routerLink="/devices"><span nz-icon nzType="control"></span> <span>Manage devices</span></li>
-         <li nz-menu-item nzMatchRouter><span nz-icon nzType="form"></span> <span>Manage request</span></li>
-         <li nz-menu-item nzMatchRouter><span nz-icon nzType="check-circle"></span> <span>Accepted devices</span></li>
-         <li nz-menu-item nzMatchRouter><span nz-icon nzType="bar-chart"></span> <span>Device tracking</span></li>
+         <li nz-menu-item nzMatchRouter routerLink="/home">
+            <span nz-icon nzType="laptop"></span><span>{{ 'DEVICES' | translate }}</span>
+         </li>
+         <li nz-menu-item nzMatchRouter routerLink="/members">
+            <span nz-icon nzType="user"></span> <span>{{ 'MANAGE_MEMBERS' | translate }}</span>
+         </li>
+         <li nz-menu-item nzMatchRouter routerLink="/devices">
+            <span nz-icon nzType="control"></span> <span>{{ 'MANAGE_DEVICES' | translate }}</span>
+         </li>
+         <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="form"></span> <span>{{ 'MANAGE_REQUEST' | translate }}</span>
+         </li>
+         <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="check-circle"></span> <span>{{ 'ACCEPTED_DEVICES' | translate }}</span>
+         </li>
+         <li nz-menu-item nzMatchRouter>
+            <span nz-icon nzType="bar-chart"></span> <span>{{ 'DEVICE_TRACKING' | translate }}</span>
+         </li>
       </ul>
       <div [ngClass]="{ 'close-trigger': true, 'show-trigger': !isCollapsed, 'hide-trigger': isCollapsed }" (click)="isCollapsed = !isCollapsed">
          <span nz-icon nzType="menu"></span>
@@ -22,11 +31,11 @@
       <nz-header>
          <div class="app-header d-flex justify-content-end container gap-2">
             <div class="language_box">
-               <nz-select [(ngModel)]="selectedValue" class="w-100">
-                  <nz-option nzValue="vie" nzLabel="Vietnam"></nz-option>
-                  <nz-option nzValue="eng" nzLabel="English"></nz-option>
-                  <nz-option nzValue="tha" nzLabel="Thailand"></nz-option>
-                  <nz-option nzValue="ind" nzLabel="Indonesia"></nz-option>
+               <nz-select [(ngModel)]="language" (ngModelChange)="onChangeLanguage($event)" class="w-100">
+                  <nz-option nzValue="vi" nzLabel="Vietnam"></nz-option>
+                  <nz-option nzValue="en" nzLabel="England"></nz-option>
+                  <nz-option nzValue="ko" nzLabel="Korean"></nz-option>
+                  <nz-option nzValue="th" nzLabel="Thailand"></nz-option>
                </nz-select>
             </div>
             <div class="member__box d-flex">

@@ -1,3 +1,9 @@
 {
-  "HELLO": "Hello world"
+  "HELLO": "Hello world",
+  "DEVICES": "Devices",
+  "MANAGE_MEMBERS": "Manage members",
+  "MANAGE_DEVICES": "Manage devices",
+  "MANAGE_REQUEST": "Manage request",
+  "ACCEPTED_DEVICES": "Accepted devices",
+  "DEVICE_TRACKING": "Device tracking"
 }

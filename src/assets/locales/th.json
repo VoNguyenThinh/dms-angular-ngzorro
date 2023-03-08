@@ -1,0 +1,9 @@
+{
+  "HELLO": "สวัสดีชาวโลก",
+  "DEVICES": "อุปกรณ์",
+  "MANAGE_MEMBERS": "จัดการสมาชิก",
+  "MANAGE_DEVICES": "จัดการอุปกรณ์",
+  "MANAGE_REQUEST": "จัดการคำขอ",
+  "ACCEPTED_DEVICES": "อุปกรณ์ที่ยอมรับ",
+  "DEVICE_TRACKING": "การติดตามอุปกรณ์"
+}

@@ -13,7 +13,7 @@ import { GlobalService } from 'src/app/services/global.service';
 export class MainLayoutComponent implements OnInit {
    isCollapsed: boolean = false;
    userInfo: any;
-   selectedValue: string = 'eng';
+   language: string;
 
    constructor(
       private router: Router,
@@ -22,12 +22,17 @@ export class MainLayoutComponent implements OnInit {
       private cookieService: CookieServices
    ) {}
 
+   onChangeLanguage($event: string) {
+      this.globalService.setLanguage($event);
+   }
+
    onLogout() {
       this.authService.logout({
          onSuccess: res => {
             if (res) {
                this.cookieService.removeItem(STRINGS.STORAGE_KEY.TOKEN);
                this.cookieService.removeItem(STRINGS.USER.EMAIL);
+               this.cookieService.removeItem(STRINGS.STORAGE_KEY.LANGUAGE);
                this.globalService.setIsAuthenticated(false);
                this.globalService.setAppLoading(true);
                setTimeout(() => {
@@ -40,6 +45,7 @@ export class MainLayoutComponent implements OnInit {
    }
 
    ngOnInit(): void {
+      this.language = this.globalService.getLanguage();
       this.globalService.userInfo.subscribe(data => {
          this.userInfo = data;
       });

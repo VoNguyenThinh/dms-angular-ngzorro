@@ -17,14 +17,13 @@ import { NGZorroModule } from './modules/ng-zorro.module';
 import { CookieService } from 'ngx-cookie-service';
 import { Interceptor } from './api/interceptor';
 import { NotFoundPageComponent } from './components/not-found-page/not-found-page.component';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 registerLocaleData(en);
 
-export function createTranslateLoader(http: HttpClient) {
+export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
    return new TranslateHttpLoader(http, '../assets/locales/', '.json');
 }
-
 @NgModule({
    declarations: [AppComponent, NotFoundPageComponent],
    imports: [
@@ -38,9 +37,10 @@ export function createTranslateLoader(http: HttpClient) {
       TranslateModule.forRoot({
          loader: {
             provide: TranslateLoader,
-            useFactory: createTranslateLoader,
+            useFactory: HttpLoaderFactory,
             deps: [HttpClient]
          },
+         isolate: true
       }),
       NgxLoadingModule.forRoot({
          animationType: ngxLoadingAnimationTypes.circleSwish

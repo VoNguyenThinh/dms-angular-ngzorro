@@ -1,3 +1,9 @@
 {
-  "HELLO": "Xin chào thế giới"
+  "HELLO": "Xin chào thế giới",
+  "DEVICES": "Thiết bị",
+  "MANAGE_MEMBERS": "Quản lý người dùng",
+  "MANAGE_DEVICES": "Quản lý thiết bị",
+  "MANAGE_REQUEST": "Quản lý yêu cầu",
+  "ACCEPTED_DEVICES": "Thiết bị đã cấp",
+  "DEVICE_TRACKING": "Lịch sử phê duyệt"
 }

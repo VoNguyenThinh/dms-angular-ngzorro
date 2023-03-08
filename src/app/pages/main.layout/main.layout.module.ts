@@ -10,9 +10,11 @@ import { UserComponent } from '../user/user.component';
 import { LongStringPipe } from 'src/app/pipes/long-string.pipe';
 import { ManageDevicesComponent } from '../manage-devices/manage-devices.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LazyLoadTranslateModule } from 'src/app/modules/lazy-load-translate.modules';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
-   imports: [CommonModule, MainLayoutRoutingModule, NGZorroModule, IconsProviderModule, FormsModule, ReactiveFormsModule],
+   imports: [CommonModule, MainLayoutRoutingModule, NGZorroModule, IconsProviderModule, FormsModule, ReactiveFormsModule, TranslateModule],
    declarations: [MainLayoutComponent, HomePageComponent, UserComponent, ManageDevicesComponent, LongStringPipe],
    exports: [MainLayoutComponent]
 })

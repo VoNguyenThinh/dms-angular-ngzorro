@@ -1,0 +1,9 @@
+{
+  "HELLO": "안녕 세상",
+  "DEVICES": "장치",
+  "MANAGE_MEMBERS": "회원 관리",
+  "MANAGE_DEVICES": "기기 관리",
+  "MANAGE_REQUEST": "요청 관리",
+  "ACCEPTED_DEVICES": "허용된 장치",
+  "DEVICE_TRACKING": "장치 추적"
+}
