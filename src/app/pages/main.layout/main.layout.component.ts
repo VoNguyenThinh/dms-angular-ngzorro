@@ -1,5 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieServices } from 'src/app/services/cookie.service';
 import { GlobalService } from 'src/app/services/global.service';
@@ -10,6 +11,8 @@ import { GlobalService } from 'src/app/services/global.service';
    providers: []
 })
 export class MainLayoutComponent implements OnInit, OnDestroy {
+   private subscriptions: Subscription[] = [];
+
    isCollapsed: boolean = false;
    userInfo: any;
    language: string;
@@ -43,16 +46,18 @@ export class MainLayoutComponent implements OnInit, OnDestroy {
    }
 
    ngOnInit(): void {
-      this.globalService.userInfo.subscribe(data => {
-         this.userInfo = data;
-      });
+      this.subscriptions.push(
+         this.globalService.userInfo.subscribe(data => {
+            this.userInfo = data;
+         }),
 
-      this.globalService.language.subscribe(lang => {
-         this.language = lang;
-      });
+         this.globalService.language.subscribe(lang => {
+            this.language = lang;
+         })
+      );
    }
 
    ngOnDestroy() {
-      // this.subscription.unsubscribe();
+      this.subscriptions.forEach(subscription => subscription.unsubscribe());
    }
 }
