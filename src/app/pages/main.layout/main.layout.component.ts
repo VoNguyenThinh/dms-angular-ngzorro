@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Router } from '@angular/router';
-import { STRINGS } from 'src/app/constants';
 import { AuthService } from 'src/app/services/auth.service';
 import { CookieServices } from 'src/app/services/cookie.service';
 import { GlobalService } from 'src/app/services/global.service';
@@ -10,7 +9,7 @@ import { GlobalService } from 'src/app/services/global.service';
    styleUrls: ['./main.layout.component.scss'],
    providers: []
 })
-export class MainLayoutComponent implements OnInit {
+export class MainLayoutComponent implements OnInit, OnDestroy {
    isCollapsed: boolean = false;
    userInfo: any;
    language: string;
@@ -19,7 +18,7 @@ export class MainLayoutComponent implements OnInit {
       private router: Router,
       private authService: AuthService,
       private globalService: GlobalService,
-      private cookieService: CookieServices
+      private cookieService: CookieServices,
    ) {}
 
    onChangeLanguage($event: string) {
@@ -30,11 +29,10 @@ export class MainLayoutComponent implements OnInit {
       this.authService.logout({
          onSuccess: res => {
             if (res) {
-               this.cookieService.removeItem(STRINGS.STORAGE_KEY.TOKEN);
-               this.cookieService.removeItem(STRINGS.USER.EMAIL);
-               this.cookieService.removeItem(STRINGS.STORAGE_KEY.LANGUAGE);
+               this.cookieService.clearCookie();
                this.globalService.setIsAuthenticated(false);
                this.globalService.setAppLoading(true);
+
                setTimeout(() => {
                   this.globalService.setAppLoading(false);
                   this.router.navigate(['auth/login']);
@@ -45,9 +43,16 @@ export class MainLayoutComponent implements OnInit {
    }
 
    ngOnInit(): void {
-      this.language = this.globalService.getLanguage();
       this.globalService.userInfo.subscribe(data => {
          this.userInfo = data;
       });
+
+      this.globalService.language.subscribe(lang => {
+         this.language = lang;
+      });
+   }
+
+   ngOnDestroy() {
+      // this.subscription.unsubscribe();
    }
 }

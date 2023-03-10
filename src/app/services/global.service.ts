@@ -4,12 +4,13 @@ import { isEmpty } from 'lodash';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { STRINGS } from '../constants';
 import { CookieServices } from './cookie.service';
+import { FirebaseService } from './firebase.service';
 
 @Injectable({
    providedIn: 'root'
 })
 export class GlobalService {
-   constructor(private cookieService: CookieServices, private translate: TranslateService) {}
+   constructor(private cookieService: CookieServices, private translate: TranslateService, private firebaseService: FirebaseService) {}
 
    private appLoading$ = new BehaviorSubject<boolean>(false);
    public appLoading = this.appLoading$.asObservable();
@@ -19,6 +20,9 @@ export class GlobalService {
 
    private userInfo$ = new BehaviorSubject<any>(null);
    public userInfo = this.userInfo$.asObservable();
+
+   private language$ = new BehaviorSubject<any>(null);
+   public language = this.language$.asObservable();
 
    setAppLoading(value: boolean) {
       this.appLoading$.next(value);
@@ -34,11 +38,9 @@ export class GlobalService {
 
    setLanguage(lang: string) {
       this.translate.use(lang);
+      this.language$.next(lang);
+      this.firebaseService.setFirebaseLanguage(lang);
       this.cookieService.setItem(STRINGS.STORAGE_KEY.LANGUAGE, lang);
-   }
-
-   getLanguage() {
-      return this.translate.currentLang;
    }
 
    checkUserInfo() {

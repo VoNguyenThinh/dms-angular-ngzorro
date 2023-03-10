@@ -40,10 +40,13 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
             useFactory: HttpLoaderFactory,
             deps: [HttpClient]
          },
-         isolate: true
+         isolate: true,
+         defaultLanguage: 'en'
       }),
       NgxLoadingModule.forRoot({
-         animationType: ngxLoadingAnimationTypes.circleSwish
+          animationType: ngxLoadingAnimationTypes.cubeGrid,
+          backdropBackgroundColour: '#ffffff',
+          primaryColour: '#16a085'
       })
    ],
    providers: [{ provide: NZ_I18N, useValue: en_US }, { provide: HTTP_INTERCEPTORS, useClass: Interceptor, multi: true }, CookieService],
