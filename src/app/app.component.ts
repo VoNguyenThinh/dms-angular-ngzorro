@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
       private firebaseService: FirebaseService
    ) {}
 
-   async ngOnInit() {
+   ngOnInit() {
       this.globalService.setAppLoading(true);
       this.globalService.appLoading.subscribe(value => {
          this.appLoading = value;
@@ -30,16 +30,19 @@ export class AppComponent implements OnInit {
 
       if (token) {
          this.globalService.setIsAuthenticated(true);
-         const language = this.cookieService.getItem(STRINGS.STORAGE_KEY.LANGUAGE);
-         this.globalService.setLanguage(language ?? 'en');
 
-         this.firebaseService.getFirebaseLanguage((snapshot: any) => {
-            this.globalService.setLanguage(snapshot.val());
+         this.authService.getUserInfo(() => {
+            this.globalService.setAppLoading(false);
          });
-
-         let userInfo = await this.authService.getUserInfo();
-         this.globalService.setUserInfo({ email: userInfo?.email, uid: userInfo?.uid });
+      } else {
          this.globalService.setAppLoading(false);
       }
+
+      const language = this.cookieService.getItem(STRINGS.STORAGE_KEY.LANGUAGE);
+      this.globalService.setLanguage(language);
+
+      this.firebaseService.getFirebaseLanguage((snapshot: any) => {
+         this.globalService.setLanguage(snapshot.val());
+      });
    }
 }

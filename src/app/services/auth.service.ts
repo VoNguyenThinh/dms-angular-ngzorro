@@ -7,12 +7,13 @@ import { LoginPayload } from '../interface';
 import { ResponseMethod } from '../interface/login.interface';
 import { CookieServices } from './cookie.service';
 import { auth, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, onAuthStateChanged, User } from '../config/firebase.config';
+import { GlobalService } from './global.service';
 
 @Injectable({
    providedIn: 'root'
 })
 export class AuthService {
-   constructor(private httpClient: HttpClient, private cookieService: CookieServices) {}
+   constructor(private httpClient: HttpClient, private cookieService: CookieServices, private globalServices: GlobalService) {}
 
    createUser(payload: { email: string; password: string }, { onSuccess, onError }: ResponseMethod) {
       createUserWithEmailAndPassword(auth, payload.email, payload.password)
@@ -44,11 +45,10 @@ export class AuthService {
          });
    }
 
-   async getUserInfo() {
-      return new Promise<User | null>(resolve => {
-         onAuthStateChanged(auth, (user: User | null) => {
-            resolve(user);
-         });
+   getUserInfo(onSuccess: Function) {
+      onAuthStateChanged(auth, user => {
+         this.globalServices.setUserInfo({ email: user?.email, uid: user?.uid });
+         onSuccess && onSuccess(user);
       });
    }
 
